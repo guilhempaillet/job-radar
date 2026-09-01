@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}{{ job.title }} · Job Radar{% endblock %}
+{% block content %}
+<a class="back" href="/">← Back to roles</a>
+<section class="detail-head"><div class="company-mark large">{{ job.company[:2]|upper }}</div><div><p class="company">{{ job.company }}</p><h1>{{ job.title }}</h1><p>{{ job.location }} · {{ job.workplace or 'Workplace not stated' }}</p></div><div class="metric"><strong>{{ job.score }}</strong><span>fit score</span></div></section>
+<div class="detail-grid">
+  <article class="panel"><h2>Why it ranks here</h2>{% for name, points in job.score_breakdown.items() %}<div class="scorebar"><span>{{ name|title }}</span><div><i style="width:{{ points * 3 }}%"></i></div><b>{{ points }}</b></div>{% endfor %}
+  <h3>Signals</h3><ul>{% for item in job.why %}<li>{{ item }}</li>{% endfor %}</ul><h3>Concerns</h3><ul>{% for item in job.concerns %}<li>{{ item }}</li>{% else %}<li>No obvious blocker.</li>{% endfor %}</ul></article>
+  <article class="panel"><h2>Your decision</h2><p class="muted">Refreshes never overwrite these human-owned fields.</p><form method="post" action="/jobs/{{ job.id }}/triage" class="triage">
+    <label>Status<select name="status">{% for x in ['Inbox','Shortlist','Applied','Dismissed'] %}<option {% if job.status==x %}selected{% endif %}>{{ x }}</option>{% endfor %}</select></label>
+    <label>Tags<input name="tags" value="{{ job.tags|join(', ') }}" placeholder="remote, referral, stretch"></label>
+    <label>Notes<textarea name="notes" rows="5" placeholder="Context for future you">{{ job.notes }}</textarea></label><button>Save decision</button></form></article>
+  <article class="panel evidence"><h2>Extracted facts and evidence</h2><h3>Experience</h3>{% for item in job.experience_evidence %}<blockquote>“{{ item.quote }}” <span>{{ item.confidence }}</span></blockquote>{% else %}<p>Not explicitly stated.</p>{% endfor %}<h3>Benefits</h3><p>{{ job.benefits|join(' · ') or 'Not explicitly stated.' }}</p></article>
+  <article class="panel description"><h2>Source description</h2><p class="preline">{{ job.description }}</p>{% if job.source_url %}<a class="button-link" href="{{ job.source_url }}" rel="noreferrer">Open source posting ↗</a>{% endif %}</article>
+</div>
+{% endblock %}
+

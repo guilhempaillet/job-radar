@@ -1,0 +1,5 @@
+{% extends "base.html" %}{% block title %}Changes · Job Radar{% endblock %}{% block content %}
+<section class="page-head"><p class="eyebrow">CHANGE INTELLIGENCE</p><h1>What changed?</h1><p>A calm audit log—not a stream of notifications.</p></section>
+<section class="timeline">{% for c in changes %}<article><span class="change-kind {{ c.kind }}">{{ c.kind }}</span><div><strong>{{ c.detail }}</strong><p>{{ c.observed_at }}</p></div></article>{% else %}<p>No changes yet.</p>{% endfor %}</section>
+{% endblock %}
+

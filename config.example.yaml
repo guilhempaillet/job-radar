@@ -1,0 +1,18 @@
+profile:
+  target_titles: [product manager, technical product manager, product lead]
+  target_skills: [ai, machine learning, developer tools, analytics, platform]
+  preferred_locations: [remote, toronto, new york, san francisco]
+  target_experience_years: 6
+
+sources:
+  # Public ATS board tokens only. No credentials are required.
+  # - type: greenhouse
+  #   company: Example Company
+  #   token: examplecompany
+  # - type: lever
+  #   company: Example Company
+  #   token: examplecompany
+  # - type: ashby
+  #   company: Example Company
+  #   token: ExampleCompany
+  []

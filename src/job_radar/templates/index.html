@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="hero">
+  <div><p class="eyebrow">EVIDENCE-FIRST JOB SEARCH</p><h1>Turn a noisy job market into a reviewable queue.</h1>
+  <p>Every score is explainable. Every extracted fact keeps its source. Your decisions remain yours.</p></div>
+  <div class="metric"><strong>{{ jobs|length }}</strong><span>matching roles</span></div>
+</section>
+<form class="filters" method="get">
+  <label class="search">Search<input name="q" value="{{ filters.q }}" placeholder="Title, company, skill…"></label>
+  <label>Status<select name="status"><option value="">Any</option>{% for x in ['Inbox','Shortlist','Applied','Dismissed'] %}<option {% if filters.status==x %}selected{% endif %}>{{ x }}</option>{% endfor %}</select></label>
+  <label>Workplace<select name="workplace"><option value="">Any</option>{% for x in ['Remote','Hybrid','In person'] %}<option {% if filters.workplace==x %}selected{% endif %}>{{ x }}</option>{% endfor %}</select></label>
+  <label>Min score<input type="number" min="0" max="100" name="min_score" value="{{ filters.min_score or '' }}" placeholder="0"></label>
+  <label>Max years<input type="number" min="0" max="20" name="max_experience" value="{{ filters.max_experience if filters.max_experience is not none else '' }}" placeholder="Any"></label>
+  <button>Apply filters</button><a class="clear" href="/">Clear</a>
+</form>
+<section class="job-list">
+{% for job in jobs %}
+<article class="job-card score-{{ 'high' if job.score >= 85 else 'medium' if job.score >= 70 else 'low' }}">
+  <div class="company-mark">{{ job.company[:2]|upper }}</div>
+  <div class="score"><strong>{{ job.score }}</strong><span>fit</span></div>
+  <div class="job-main">
+    <div class="title-row"><div><p class="company">{{ job.company }}</p><h2><a href="/jobs/{{ job.id }}">{{ job.title }}</a></h2></div><span class="status">{{ job.status }}</span></div>
+    <div class="facts">
+      <span><b>WORK</b>{{ job.workplace or 'Unknown' }} · {{ job.location }}</span>
+      <span><b>EXPERIENCE</b>{{ (job.experience_min|string + '+ years') if job.experience_min is not none else 'Not stated' }}</span>
+      <span><b>BENEFITS</b>{{ job.benefits[:3]|join(' · ') if job.benefits else 'Not stated' }}</span>
+    </div>
+    <div class="insight"><span><b>WHY IT FITS</b>{{ job.why[:2]|join(' · ') or 'Review the evidence' }}</span><span><b>PRIMARY CONCERN</b>{{ job.concerns[0] if job.concerns else 'No obvious blocker' }}</span></div>
+  </div>
+  <a class="review" href="/jobs/{{ job.id }}">Review →</a>
+</article>
+{% else %}<div class="empty"><h2>No roles match.</h2><p>Clear a filter or broaden the search.</p></div>{% endfor %}
+</section>
+{% endblock %}
+

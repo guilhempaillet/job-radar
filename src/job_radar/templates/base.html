@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>{% block title %}Job Radar{% endblock %}</title>
+  <link rel="stylesheet" href="/static/app.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="/"><span class="radar">◉</span> Job Radar</a>
+    <nav><a href="/">Roles</a><a href="/companies">Companies</a><a href="/changes">Changes</a></nav>
+  </header>
+  <main>{% block content %}{% endblock %}</main>
+  <footer>Local-first · evidence-backed · human-controlled</footer>
+</body>
+</html>
+
