@@ -13,6 +13,12 @@ This repository was created as a clean product derivative, not as a mirror of a 
 
 The bundled companies, jobs, descriptions, and links are fictional sample data.
 
+## Optional external model boundary
+
+Rule-based extraction is local and always runs first. The LLM fallback is disabled unless a user explicitly sets `llm_fallback.enabled: true`, configures an endpoint/model, and supplies a key through an environment variable. Enabling it sends job-description text to that configured provider. Model output is schema-validated and must cite exact source text before persistence.
+
+No model credentials or calls are needed for the demo, tests, CI, or public ATS connectors.
+
 ## Before a public release
 
 1. Run tests and linting.
