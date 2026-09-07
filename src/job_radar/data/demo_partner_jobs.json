@@ -1,0 +1,18 @@
+[
+  {
+    "source_job_id": "partner-northstar-agents",
+    "company": "Northstar AI",
+    "title": "Senior Product Manager, AI Agents",
+    "location": "Remote — Canada or United States",
+    "source_url": "https://example.com/partner/northstar-pm-agents",
+    "description": "Lead the product strategy for an AI agent platform used by operations teams. You will partner with engineering, design, and applied AI to ship evaluation tooling, orchestration workflows, and trustworthy user controls. The role is fully remote across Canada and the United States. Requirements: 5+ years of product management experience, including 2+ years building AI or machine learning products. The salary range is USD $175,000–$220,000 per year. Benefits include equity, health and dental coverage, flexible PTO, parental leave, and a learning budget."
+  },
+  {
+    "source_job_id": "partner-lattice-platform",
+    "company": "Lattice Forge",
+    "title": "Product Manager, AI Platform",
+    "location": "Remote — Canada",
+    "source_url": "https://example.com/partner/lattice-platform",
+    "description": "Build platform workflows that help product teams evaluate and deploy machine learning features. This role is remote within Canada. Candidates need 4+ years of product management experience. Compensation is CAD $150,000–$185,000 per year. Benefits include equity, health and dental coverage, flexible PTO, and an RRSP match."
+  }
+]

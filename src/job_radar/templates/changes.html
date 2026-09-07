@@ -1,5 +1,20 @@
-{% extends "base.html" %}{% block title %}Changes · Job Radar{% endblock %}{% block content %}
-<section class="page-head"><p class="eyebrow">CHANGE INTELLIGENCE</p><h1>What changed?</h1><p>A calm audit log—not a stream of notifications.</p></section>
-<section class="timeline">{% for c in changes %}<article><span class="change-kind {{ c.kind }}">{{ c.kind }}</span><div><strong>{{ c.detail }}</strong><p>{{ c.observed_at }}</p></div></article>{% else %}<p>No changes yet.</p>{% endfor %}</section>
+{% extends "base.html" %}
+{% block title %}Changes · Job Radar{% endblock %}
+{% block content %}
+<section class="page-head"><p class="eyebrow">DAY-OVER-DAY REVIEW</p><h1>What changed?</h1><p>Review additions, edits, and closed roles in one calm batch.</p></section>
+<div class="changes-grid">
+  <section class="timeline">
+    <h2>Recent role changes</h2>
+    {% for change in changes %}
+    <article><span class="change-kind {{ change.kind }}">{{ change.kind }}</span><div><strong>{{ change.detail }}</strong>{% if change.changed_fields %}<p>Changed: {{ change.changed_fields|join(', ') }}</p>{% endif %}<p>{{ change.observed_at }}</p></div></article>
+    {% else %}<div class="empty"><h3>No changes yet.</h3><p>Run a refresh to build the audit trail.</p></div>{% endfor %}
+  </section>
+  <section class="timeline runs">
+    <h2>Refresh history</h2>
+    {% for run in runs %}
+    <article><span class="health-dot {{ run.status }}"></span><div><strong>{{ run.label or run.source_id }}</strong><p>{{ run.status }} · {{ run.added }} added · {{ run.updated }} updated · {{ run.deactivated }} closed{% if run.deduplicated %} · {{ run.deduplicated }} duplicate merged{% endif %}</p><p>{{ run.finished_at }}</p></div></article>
+    {% else %}<p>No refreshes yet.</p>{% endfor %}
+  </section>
+</div>
 {% endblock %}
 

@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}Sources · Job Radar{% endblock %}
+{% block content %}
+<section class="page-head"><p class="eyebrow">SOURCE HEALTH</p><h1>Know what ran—and what did not.</h1><p>Each source succeeds or fails independently. A failed board never closes roles from another source.</p></section>
+<section class="source-grid">
+{% for source in sources %}
+  <article class="panel source-card">
+    <div class="source-title"><span class="health-dot {{ source.last_status }}"></span><div><p class="company">{{ source.kind }}</p><h2>{{ source.label }}</h2></div><span class="status">{{ source.last_status|replace('_',' ') }}</span></div>
+    <strong class="source-count">{{ source.current_jobs }}</strong><span class="muted">active source records</span>
+    <dl><div><dt>Last attempt</dt><dd>{{ source.last_attempt_at or 'Never' }}</dd></div><div><dt>Last success</dt><dd>{{ source.last_success_at or 'Never' }}</dd></div></dl>
+    {% if source.last_error %}<p class="error-box">{{ source.last_error }}</p>{% endif %}
+  </article>
+{% else %}
+  <div class="empty panel"><h2>No sources have run.</h2><p>Start with <code>job-radar init-demo</code>, then add public ATS boards in <code>config.yaml</code>.</p></div>
+{% endfor %}
+</section>
+{% endblock %}

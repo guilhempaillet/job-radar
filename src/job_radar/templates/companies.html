@@ -1,5 +1,4 @@
 {% extends "base.html" %}{% block title %}Companies · Job Radar{% endblock %}{% block content %}
 <section class="page-head"><p class="eyebrow">PORTFOLIO VIEW</p><h1>Company radar</h1><p>See where the opportunity density and strongest matches live.</p></section>
-<section class="table-wrap"><table><thead><tr><th>Company</th><th>Open roles</th><th>Average fit</th><th>Top fit</th><th>Last seen</th></tr></thead><tbody>{% for c in companies %}<tr><td><span class="mini-mark">{{ c.company[:2]|upper }}</span><b>{{ c.company }}</b></td><td>{{ c.jobs }}</td><td>{{ c.average_score }}</td><td><strong>{{ c.top_score }}</strong></td><td>{{ c.last_seen[:10] }}</td></tr>{% endfor %}</tbody></table></section>
+<section class="table-wrap"><table><thead><tr><th>Company</th><th>Open roles</th><th>Remote</th><th>Average fit</th><th>Top fit</th><th>Shortlisted</th><th>Applied</th><th>Last seen</th></tr></thead><tbody>{% for c in companies %}<tr><td><span class="mini-mark">{{ c.company[:2]|upper }}</span><b>{{ c.company }}</b></td><td>{{ c.jobs }}</td><td>{{ c.remote_jobs }}</td><td>{{ c.average_score }}</td><td><strong>{{ c.top_score }}</strong></td><td>{{ c.shortlisted }}</td><td>{{ c.applied }}</td><td>{{ c.last_seen[:10] }}</td></tr>{% endfor %}</tbody></table></section>
 {% endblock %}
-

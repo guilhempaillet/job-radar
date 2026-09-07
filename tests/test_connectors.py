@@ -1,11 +1,13 @@
 import httpx
 
-from job_radar.connectors import ashby, greenhouse, lever, plain_text
+from job_radar.connectors import ashby, fetch_sources, greenhouse, lever, plain_text, source_spec
 
 
-def client(payload):
+def client(payload, status=200):
     return httpx.Client(
-        transport=httpx.MockTransport(lambda request: httpx.Response(200, json=payload))
+        transport=httpx.MockTransport(
+            lambda request: httpx.Response(status, json=payload, request=request)
+        )
     )
 
 
@@ -14,9 +16,9 @@ def test_plain_text_decodes_and_removes_markup():
 
 
 def test_greenhouse_normalization():
+    source = source_spec({"type": "greenhouse", "company": "Acme", "token": "acme"})
     jobs = greenhouse(
-        "Acme",
-        "acme",
+        source,
         client(
             {
                 "jobs": [
@@ -31,14 +33,14 @@ def test_greenhouse_normalization():
             }
         ),
     )
-    assert jobs[0]["id"] == "greenhouse:acme:1"
+    assert jobs[0]["source_job_id"] == "1"
     assert jobs[0]["description"] == "5+ years"
 
 
 def test_lever_and_ashby_normalization():
+    lever_source = source_spec({"type": "lever", "company": "Acme", "token": "acme"})
     lever_jobs = lever(
-        "Acme",
-        "acme",
+        lever_source,
         client(
             [
                 {
@@ -54,9 +56,9 @@ def test_lever_and_ashby_normalization():
         ),
     )
     assert lever_jobs[0]["description"] == "Build Ship"
+    ashby_source = source_spec({"type": "ashby", "company": "Acme", "token": "acme"})
     ashby_jobs = ashby(
-        "Acme",
-        "acme",
+        ashby_source,
         client(
             {
                 "jobs": [
@@ -72,3 +74,20 @@ def test_lever_and_ashby_normalization():
         ),
     )
     assert ashby_jobs[0]["description"] == "Lead"
+
+
+def test_fetch_isolates_a_failed_source(monkeypatch):
+    def fake_greenhouse(source, client):
+        if source["token"] == "broken":
+            raise httpx.ConnectError("offline")
+        return [{"source_job_id": "1"}]
+
+    monkeypatch.setattr("job_radar.connectors.greenhouse", fake_greenhouse)
+    results = fetch_sources(
+        [
+            {"type": "greenhouse", "company": "Good", "token": "good"},
+            {"type": "greenhouse", "company": "Broken", "token": "broken"},
+        ]
+    )
+    assert len(results[0].jobs) == 1
+    assert isinstance(results[1].error, httpx.ConnectError)

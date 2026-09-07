@@ -1,35 +1,50 @@
 {% extends "base.html" %}
 {% block content %}
 <section class="hero">
-  <div><p class="eyebrow">EVIDENCE-FIRST JOB SEARCH</p><h1>Turn a noisy job market into a reviewable queue.</h1>
-  <p>Every score is explainable. Every extracted fact keeps its source. Your decisions remain yours.</p></div>
-  <div class="metric"><strong>{{ jobs|length }}</strong><span>matching roles</span></div>
+  <div>
+    <p class="eyebrow">A CALMER WAY TO SEARCH</p>
+    <h1>Turn scattered job boards into a reviewable queue.</h1>
+    <p>Collect roles, see why they rank, filter the list, and keep your decisions through every refresh.</p>
+  </div>
+  <div class="hero-metrics">
+    <div class="metric"><strong>{{ jobs|length }}</strong><span>matching roles</span></div>
+    <a class="source-pill {{ 'warning' if source_summary.failed else '' }}" href="/sources">
+      <b>{{ source_summary.total or 0 }}</b> sources ·
+      {% if source_summary.failed %}{{ source_summary.failed }} needs attention{% else %}healthy{% endif %}
+    </a>
+  </div>
 </section>
 <form class="filters" method="get">
   <label class="search">Search<input name="q" value="{{ filters.q }}" placeholder="Title, company, skill…"></label>
+  <label>Location<input name="location_q" value="{{ filters.location_q }}" placeholder="Toronto, remote…"></label>
   <label>Status<select name="status"><option value="">Any</option>{% for x in ['Inbox','Shortlist','Applied','Dismissed'] %}<option {% if filters.status==x %}selected{% endif %}>{{ x }}</option>{% endfor %}</select></label>
   <label>Workplace<select name="workplace"><option value="">Any</option>{% for x in ['Remote','Hybrid','In person'] %}<option {% if filters.workplace==x %}selected{% endif %}>{{ x }}</option>{% endfor %}</select></label>
   <label>Min score<input type="number" min="0" max="100" name="min_score" value="{{ filters.min_score or '' }}" placeholder="0"></label>
   <label>Max years<input type="number" min="0" max="20" name="max_experience" value="{{ filters.max_experience if filters.max_experience is not none else '' }}" placeholder="Any"></label>
-  <button>Apply filters</button><a class="clear" href="/">Clear</a>
+  <label>Min annual pay<input type="number" min="0" step="10000" name="min_compensation" value="{{ filters.min_compensation if filters.min_compensation is not none else '' }}" placeholder="150000"></label>
+  <label>Currency<select name="currency"><option value="">Any</option>{% for x in ['USD','CAD'] %}<option {% if filters.currency==x %}selected{% endif %}>{{ x }}</option>{% endfor %}</select></label>
+  <label>Sort<select name="sort">{% for value,label in [('score','Best fit'),('compensation','Highest pay'),('newest','Newest'),('company','Company')] %}<option value="{{ value }}" {% if filters.sort==value %}selected{% endif %}>{{ label }}</option>{% endfor %}</select></label>
+  <div class="filter-actions"><button>Apply filters</button><a class="clear" href="/">Clear</a></div>
 </form>
 <section class="job-list">
 {% for job in jobs %}
 <article class="job-card score-{{ 'high' if job.score >= 85 else 'medium' if job.score >= 70 else 'low' }}">
-  <div class="company-mark">{{ job.company[:2]|upper }}</div>
+  <div class="company-mark" aria-hidden="true">{{ job.company[:2]|upper }}</div>
   <div class="score"><strong>{{ job.score }}</strong><span>fit</span></div>
   <div class="job-main">
     <div class="title-row"><div><p class="company">{{ job.company }}</p><h2><a href="/jobs/{{ job.id }}">{{ job.title }}</a></h2></div><span class="status">{{ job.status }}</span></div>
-    <div class="facts">
+    <div class="facts four">
       <span><b>WORK</b>{{ job.workplace or 'Unknown' }} · {{ job.location }}</span>
       <span><b>EXPERIENCE</b>{{ (job.experience_min|string + '+ years') if job.experience_min is not none else 'Not stated' }}</span>
+      <span><b>COMPENSATION</b>{% if job.compensation_min %}{{ job.compensation_currency }} {{ "${:,.0f}".format(job.compensation_min) }}{% if job.compensation_max %}–{{ "${:,.0f}".format(job.compensation_max) }}{% endif %} / {{ job.compensation_period }}{% else %}Not stated{% endif %}</span>
       <span><b>BENEFITS</b>{{ job.benefits[:3]|join(' · ') if job.benefits else 'Not stated' }}</span>
     </div>
     <div class="insight"><span><b>WHY IT FITS</b>{{ job.why[:2]|join(' · ') or 'Review the evidence' }}</span><span><b>PRIMARY CONCERN</b>{{ job.concerns[0] if job.concerns else 'No obvious blocker' }}</span></div>
   </div>
-  <a class="review" href="/jobs/{{ job.id }}">Review →</a>
+  <a class="review" href="/jobs/{{ job.id }}">Review <span aria-hidden="true">→</span></a>
 </article>
-{% else %}<div class="empty"><h2>No roles match.</h2><p>Clear a filter or broaden the search.</p></div>{% endfor %}
+{% else %}
+<div class="empty"><h2>No roles match these filters.</h2><p>Clear a filter or broaden the location, experience, or compensation range.</p><a class="button-link" href="/">Clear filters</a></div>
+{% endfor %}
 </section>
 {% endblock %}
-

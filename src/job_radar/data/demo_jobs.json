@@ -5,7 +5,7 @@
     "title": "Senior Product Manager, AI Agents",
     "location": "Remote — Canada or United States",
     "source_url": "https://example.com/jobs/northstar-pm-agents",
-    "description": "Lead the product strategy for an AI agent platform used by operations teams. You will partner with engineering, design, and applied AI to ship evaluation tooling, orchestration workflows, and trustworthy user controls. The role is fully remote across Canada and the United States. Requirements: 5+ years of product management experience, including 2+ years building AI or machine learning products. Benefits include equity, health and dental coverage, flexible PTO, parental leave, and a learning budget."
+    "description": "Lead the product strategy for an AI agent platform used by operations teams. You will partner with engineering, design, and applied AI to ship evaluation tooling, orchestration workflows, and trustworthy user controls. The role is fully remote across Canada and the United States. Requirements: 5+ years of product management experience, including 2+ years building AI or machine learning products. The salary range is USD $175,000–$220,000 per year. Benefits include equity, health and dental coverage, flexible PTO, parental leave, and a learning budget."
   },
   {
     "id": "meridian-devtools",
@@ -13,7 +13,7 @@
     "title": "Technical Product Manager, Developer Tools",
     "location": "Toronto, Ontario",
     "source_url": "https://example.com/jobs/meridian-devtools",
-    "description": "Own the roadmap for developer experience, APIs, observability, and release workflows. This is a hybrid role with two team days per week in Toronto. Candidates should bring 4+ years of product management experience and strong familiarity with platform analytics. We offer stock options, health benefits, an RRSP match, and parental leave."
+    "description": "Own the roadmap for developer experience, APIs, observability, and release workflows. This is a hybrid role with two team days per week in Toronto. Candidates should bring 4+ years of product management experience and strong familiarity with platform analytics. The base salary is CAD $155,000 to $195,000 per year. We offer stock options, health benefits, an RRSP match, and parental leave."
   },
   {
     "id": "kinetic-evals",
@@ -21,7 +21,7 @@
     "title": "Product Lead, Model Evaluation Platform",
     "location": "New York, NY",
     "source_url": "https://example.com/jobs/kinetic-evals",
-    "description": "Build the evaluation and data quality platform behind enterprise AI products. Work across research, platform engineering, and customer teams to translate model behavior into measurable product quality. This in-person role is based in New York. Requirements include 7+ years of product experience and 3+ years leading machine learning platforms. Equity, medical coverage, 401(k), and an education stipend are provided."
+    "description": "Build the evaluation and data quality platform behind enterprise AI products. Work across research, platform engineering, and customer teams to translate model behavior into measurable product quality. This in-person role is based in New York. Requirements include 7+ years of product experience and 3+ years leading machine learning platforms. Compensation is $190,000–$245,000 USD per year. Equity, medical coverage, 401(k), and an education stipend are provided."
   },
   {
     "id": "atlas-growth",
@@ -29,7 +29,7 @@
     "title": "Product Manager, AI Growth",
     "location": "San Francisco, CA",
     "source_url": "https://example.com/jobs/atlas-growth",
-    "description": "Find and scale the activation loops for an AI-native collaboration product. You will run experiments, improve onboarding, and partner with analytics and design. Hybrid work from San Francisco. 3+ years of product management experience required. Benefits include equity, medical and vision insurance, flexible vacation, and parental leave."
+    "description": "Find and scale the activation loops for an AI-native collaboration product. You will run experiments, improve onboarding, and partner with analytics and design. Hybrid work from San Francisco. 3+ years of product management experience required. The annual salary range is $150K–$185K USD. Benefits include equity, medical and vision insurance, flexible vacation, and parental leave."
   },
   {
     "id": "northstar-observability",
@@ -45,7 +45,7 @@
     "title": "Senior Product Manager, Data Platform",
     "location": "Austin, TX",
     "source_url": "https://example.com/jobs/signal-data-pm",
-    "description": "Set strategy for a customer data and analytics platform. Partner with infrastructure engineering and enterprise users to improve reliability and governance. The team collaborates in person in Austin. Requires 6+ years in product management. Health, dental, equity, retirement, and parental leave benefits are available."
+    "description": "Set strategy for a customer data and analytics platform. Partner with infrastructure engineering and enterprise users to improve reliability and governance. The team collaborates in person in Austin. Requires 6+ years in product management. The salary range is $160,000 to $205,000 USD per year. Health, dental, equity, retirement, and parental leave benefits are available."
   },
   {
     "id": "meridian-enterprise-ai",
@@ -53,7 +53,7 @@
     "title": "Product Manager, Enterprise AI",
     "location": "Remote — North America",
     "source_url": "https://example.com/jobs/meridian-enterprise-ai",
-    "description": "Shape AI workflows for large customer operations teams, from discovery through launch and adoption. Fully remote within North America. 5+ years of product experience and 2+ years with enterprise software required. Benefits include stock options, medical coverage, flexible time off, and a retirement plan."
+    "description": "Shape AI workflows for large customer operations teams, from discovery through launch and adoption. Fully remote within North America. 5+ years of product experience and 2+ years with enterprise software required. The listed range is CAD $145,000–$180,000 per year. Benefits include stock options, medical coverage, flexible time off, and a retirement plan."
   },
   {
     "id": "harbor-trust",
@@ -61,7 +61,6 @@
     "title": "Product Manager, Trust & Safety AI",
     "location": "San Francisco or Remote US",
     "source_url": "https://example.com/jobs/harbor-trust",
-    "description": "Lead human-in-the-loop review, quality measurement, and responsible AI controls. The role can be remote in the US or hybrid in San Francisco. Candidates need 5+ years of product management experience. Equity, health insurance, 401(k), parental leave, and unlimited PTO are included."
+    "description": "Lead human-in-the-loop review, quality measurement, and responsible AI controls. The role can be remote in the US or hybrid in San Francisco. Candidates need 5+ years of product management experience. The base salary range is $180,000–$225,000 USD per year. Equity, health insurance, 401(k), parental leave, and unlimited PTO are included."
   }
 ]
-

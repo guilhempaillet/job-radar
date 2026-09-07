@@ -2,7 +2,10 @@ profile:
   target_titles: [product manager, technical product manager, product lead]
   target_skills: [ai, machine learning, developer tools, analytics, platform]
   preferred_locations: [remote, toronto, new york, san francisco]
+  preferred_workplaces: [Remote, Remote or hybrid, Hybrid]
   target_experience_years: 6
+  minimum_salary: 150000
+  minimum_salary_currency: USD
 
 sources:
   # Public ATS board tokens only. No credentials are required.
@@ -16,3 +19,12 @@ sources:
   #   company: Example Company
   #   token: ExampleCompany
   []
+
+# Off by default. Enabling this explicitly permits unresolved job-description
+# fields to be sent to the configured external endpoint. Rule-based extraction
+# always runs first, and uncited model output is rejected.
+llm_fallback:
+  enabled: false
+  endpoint: https://api.example.com/v1/chat/completions
+  model: example-model
+  api_key_env: JOB_RADAR_LLM_API_KEY
