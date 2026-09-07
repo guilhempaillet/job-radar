@@ -9,6 +9,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          # Gitleaks scans the pushed commit range, so its parent must exist locally.
+          fetch-depth: 0
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
@@ -18,4 +21,3 @@ jobs:
       - run: pytest --cov=job_radar --cov-report=term-missing
       - name: Scan repository for secrets
         uses: gitleaks/gitleaks-action@v2
-
